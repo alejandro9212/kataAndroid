@@ -1,0 +1,68 @@
+
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-single-page-report:4.2.16")
+    }
+}
+plugins {
+    id 'java'
+    id 'idea'
+    id("net.serenity-bdd.serenity-gradle-plugin") version "4.2.16"
+}
+
+group = 'co.com.kata.mobil'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'io.appium:java-client:9.4.0'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core
+    testImplementation 'net.serenity-bdd:serenity-core:4.2.16'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-screenplay
+    testImplementation 'net.serenity-bdd:serenity-screenplay:4.2.16'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit5
+    testImplementation 'net.serenity-bdd:serenity-junit5:4.2.16'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-ensure
+    testImplementation 'net.serenity-bdd:serenity-ensure:4.2.16'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-cucumber
+    implementation 'net.serenity-bdd:serenity-cucumber:4.2.16'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    implementation 'io.cucumber:cucumber-java:7.14.0'
+    implementation 'io.cucumber:cucumber-junit-platform-engine:7.14.0'
+    // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite
+    testImplementation 'org.junit.platform:junit-platform-suite:1.11.0'
+    // https://mvnrepository.com/artifact/junit/junit
+    testImplementation 'junit:junit:4.13.1'
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core
+    testImplementation 'org.hamcrest:hamcrest-core:2.2'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    testImplementation 'org.slf4j:slf4j-simple:2.0.16'
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation 'org.assertj:assertj-core:3.27.3'
+    // https://mvnrepository.com/artifact/net.thucydides/thucydides-core
+    implementation 'net.thucydides:thucydides-core:0.9.273'
+    // https://mvnrepository.com/artifact/info.cukes/cucumber-junit
+    testImplementation 'info.cukes:cucumber-junit:1.2.5'
+
+
+
+}
+
+test {
+    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+serenity {
+    reports = ["single-page-html"]
+}
+test.finalizedBy(aggregate)
